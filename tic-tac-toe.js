@@ -10,6 +10,7 @@ function displayBox(gridboxes)
     var grid = document.getElementById("board").childNodes;
     grid.forEach(element => { element.className = "square";});
     gridxo= grid.forEach(element => element.addEventListener("click", addXO));
+    
 
     
     function addXO(event){
@@ -20,24 +21,30 @@ function displayBox(gridboxes)
             if (firstPlayer){
                 if (arrGrid[index] == ""){
                     event.target.innerHTML = x;
+                    event.target.classList.add('square.X')
                     firstPlayer = false;
                     arrGrid[index] = x;
-                }
-                
+                    function changeColor(evt) {
+                        event.target.classList.toggle("X");
+                      }
+                      document.querySelector("div").onclick = changeColor;
+                    
+                    
+                } 
             }else{
                 if (arrGrid[index]==""){
                     event.target.innerHTML = o;
                     arrGrid[index] = o;
                     firstPlayer = true;
+                    function changeColor(evt) {
+                        event.target.classList.toggle("O");
+                      }
+                      document.querySelector("div").onclick = changeColor;
+                    
                 }
-
             } 
         }
-
-        if (event.target == el) {
-            event.target =event.target
-        }
-    
+       
       }
         //const listing = event.target;
         //listing.textContent =x; 
