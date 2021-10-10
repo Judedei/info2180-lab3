@@ -11,8 +11,27 @@ function displayBox(gridboxes)
     grid.forEach(element => { element.className = "square";});
     gridxo= grid.forEach(element => element.addEventListener("click", addXO));
     
-
+    grid0= grid.forEach(element => element.addEventListener("mouseover", hoverFunction));
+    grid0= grid.forEach(element => element.addEventListener("mouseout", outFunction));
     
+    function hoverFunction(event){
+        var el = document.getElementById('div');
+        var test = event.target.parentElement ;
+        var index = Array.prototype.indexOf.call(test.children, event.target);
+        if (event.target !== el) {
+            event.target.classList.toggle("hover", true);
+        } 
+    }
+
+    function outFunction(event){
+        var el = document.getElementById('div');
+        var test = event.target.parentElement ;
+        var index = Array.prototype.indexOf.call(test.children, event.target);
+        if (event.target !== el) {
+            event.target.classList.toggle("hover");
+        } 
+    }
+
     function addXO(event){
         var el = document.getElementById('div');
         var test = event.target.parentElement ;
@@ -21,26 +40,29 @@ function displayBox(gridboxes)
             if (firstPlayer){
                 if (arrGrid[index] == ""){
                     event.target.innerHTML = x;
-                    event.target.classList.add('square.X')
                     firstPlayer = false;
                     arrGrid[index] = x;
-                    function changeColor(evt) {
-                        event.target.classList.toggle("X");
-                      }
-                      document.querySelector("div").onclick = changeColor;
-                    
-                    
+                    function changeColor(event) {
+                        if (event.target.innerHTML == "X" && event.target.classList.contains("X")== false); {
+                            event.target.classList.add("X");
+                            //console.log(event.target.classList.contains("X"));
+                            
+                        }                     
+                    }
+                    document.querySelector("div").onclick = changeColor;
                 } 
             }else{
                 if (arrGrid[index]==""){
                     event.target.innerHTML = o;
                     arrGrid[index] = o;
                     firstPlayer = true;
-                    function changeColor(evt) {
-                        event.target.classList.toggle("O");
+                    function changeColor(event) {
+                        if (event.target.innerHTML == "O" && event.target.classList.contains("O")== false); {
+                            event.target.classList.add("O");
+                        }
+                        
                       }
                       document.querySelector("div").onclick = changeColor;
-                    
                 }
             } 
         }
